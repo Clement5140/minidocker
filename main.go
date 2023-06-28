@@ -8,7 +8,7 @@ import (
 	"github.com/urfave/cli"
 )
 
-const usage = `minidocker is a simple container runtime implementation.`
+const usage = `Minidocker is a simple container runtime implementation.`
 
 func main() {
 	app := cli.NewApp()
