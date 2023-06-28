@@ -18,6 +18,7 @@ func main() {
 	app.Commands = []cli.Command{
 		initCommand,
 		runCommand,
+		networkCommand,
 	}
 
 	app.Before = func(context *cli.Context) error {
