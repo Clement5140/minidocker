@@ -22,6 +22,7 @@ func RunContainerInitProcess() error {
 	if len(cmdArray) == 0 {
 		return errors.New("Run container get user command error, cmdArray is nil.")
 	}
+	setUpMount()
 	path, err := exec.LookPath(cmdArray[0])
 	if err != nil {
 		log.Errorf("Exec loop path error %v.", err)
@@ -57,4 +58,13 @@ func readUserCommand() []string {
 	}
 	msgStr := string(msg)
 	return strings.Split(msgStr, " ")
+}
+
+func setUpMount() {
+	// mount proc
+	defaultMountFlags := syscall.MS_NOEXEC | syscall.MS_NOSUID | syscall.MS_NODEV
+	err := syscall.Mount("proc", "/proc", "proc", uintptr(defaultMountFlags), "")
+	if err != nil {
+		log.Errorf("mount proc error %v", err)
+	}
 }
